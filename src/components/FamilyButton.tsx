@@ -6,7 +6,6 @@ import useMeasure from "react-use-measure"
 import { Car, Palette } from 'lucide-react'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-
 import FamilyButton from "./cult/family-button"
 
 // Update the Car interface to match the one in page.tsx
@@ -45,18 +44,19 @@ interface CarColorPickerProps {
   onColorSelect: (color: CarColor) => void;
 }
 
-const tabs = [
-  { id: 0, label: "Car", icon: Car },
-  { id: 1, label: "Color", icon: Palette },
-]
 
 export function CarColorPicker({ cars, onCarSelect, onColorSelect }: CarColorPickerProps) {
-  const [activeTab, setActiveTab] = useState(0)
-  const [direction, setDirection] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
-  const [ref, bounds] = useMeasure()
-  const [selectedCar, setSelectedCar] = useState<Car | null>(null)
-  const [carColors, setCarColors] = useState<CarColor[]>([])
+    const [activeTab, setActiveTab] = useState(0)
+    const [direction, setDirection] = useState(0)
+    const [isAnimating, setIsAnimating] = useState(false)
+    const [ref, bounds] = useMeasure()
+    const [selectedCar, setSelectedCar] = useState<Car | null>(null)
+    const [carColors, setCarColors] = useState<CarColor[]>([])
+    
+    const tabs = [
+      { id: 0, label: "Car", icon: Car, disabled: false },
+      { id: 1, label: "Color", icon: Palette, disabled: selectedCar==null },
+    ]
 
   useEffect(() => {
     if (selectedCar) {
@@ -98,23 +98,13 @@ export function CarColorPicker({ cars, onCarSelect, onColorSelect }: CarColorPic
           <ScrollArea className="h-[180px] w-full">
             <div className="grid grid-cols-4 gap-2 p-2">
               {carColors.map((color) => (
-                <TooltipProvider key={color.p0ID}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <motion.button
-                        className={`w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-white`}
-                        style={{ backgroundColor: color.hexCode }}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => onColorSelect(color)}
-                      />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{color.localizedName.en}</p>
-                      <p>{color.effect} {color.mainColor}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <motion.button
+                    className={`w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-white`}
+                    style={{ backgroundColor: color.hexCode }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => onColorSelect(color)}
+                />
               ))}
             </div>
             <ScrollBar orientation="vertical" />
@@ -162,6 +152,7 @@ export function CarColorPicker({ cars, onCarSelect, onColorSelect }: CarColorPic
               activeTab === tab.id ? "text-white " : "hover:text-neutral-300/60"
             } relative rounded-[5px] px-3 py-1.5 text-xs sm:text-sm font-medium text-neutral-600  transition focus-visible:outline-1 focus-visible:ring-1 focus-visible:ring-blue-light focus-visible:outline-none`}
             style={{ WebkitTapHighlightColor: "transparent" }}
+            disabled={tab.disabled}
           >
             {activeTab === tab.id && (
               <motion.span
