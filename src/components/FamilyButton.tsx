@@ -45,7 +45,7 @@ interface CarColorPickerProps {
   onColorSelect: (color: CarColor) => void;
 }
 
-let tabs = [
+const tabs = [
   { id: 0, label: "Car", icon: Car },
   { id: 1, label: "Color", icon: Palette },
 ]

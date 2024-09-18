@@ -7,7 +7,7 @@ import { Maximize2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { FamilyButtonDemo } from '@/components/FamilyButton';
-import SidePanel from '@/components/cult/side-panel';
+// import SidePanel from '@/components/cult/side-panel';
 
 interface Car {
   modelRange: string;
