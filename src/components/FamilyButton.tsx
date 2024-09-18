@@ -1,11 +1,10 @@
 "use client"
 
-import { useMemo, useState, useEffect } from "react"
-import { AnimatePresence, MotionConfig, motion } from "framer-motion"
-import useMeasure from "react-use-measure"
-import { Car, Palette } from 'lucide-react'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { AnimatePresence, MotionConfig, motion } from "framer-motion"
+import { Car, Palette } from 'lucide-react'
+import { useEffect, useMemo, useState } from "react"
+import useMeasure from "react-use-measure"
 import FamilyButton from "./cult/family-button"
 
 // Update the Car interface to match the one in page.tsx
