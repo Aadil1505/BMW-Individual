@@ -97,7 +97,7 @@ export function CarColorPicker({ cars, onCarSelect, onColorSelect }: CarColorPic
           <ScrollArea className="h-[180px] w-full">
             <div className="grid grid-cols-4 gap-2 p-2">
               {carColors.map((color) => (
-                <motion.button
+                <motion.button key={color.p0ID}
                     className={`w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-white`}
                     style={{ backgroundColor: color.hexCode }}
                     whileHover={{ scale: 1.1 }}
