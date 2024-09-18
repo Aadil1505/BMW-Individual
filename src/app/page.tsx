@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Maximize2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Card, CardContent } from "@/components/ui/card" 
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel"
 import { FamilyButtonDemo } from '@/components/FamilyButton';
 // import SidePanel from '@/components/cult/side-panel';
 
@@ -164,11 +166,34 @@ export default function PremiumBMWGallery() {
               src={activeImage.url}
               alt={`${selectedCar?.localizedName.en || 'BMW'} - ${activeImage.environment} - ${activeImage.viewAngle}`}
               fill
-              className="object-cover"
+              className="object-cover max-sm:opacity-50"
               priority
               quality={100}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
+
+            <div className='sm:hidden absolute inset-0 flex justify-center items-center p-4'>
+              <Carousel className="w-full max-w-sm">
+                <CarouselContent>
+                  {carImages.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
+                        <Image
+                          src={image.url}
+                          alt={`${selectedCar?.localizedName.en || 'BMW'} - ${image.environment} - ${image.viewAngle}`}
+                          fill
+                          className="object-cover"
+                          priority
+                          quality={100}
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2" />
+                <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2" />
+              </Carousel>
+            </div>
           </motion.div>
         </AnimatePresence>
       ) : (
