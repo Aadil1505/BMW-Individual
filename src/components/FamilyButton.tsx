@@ -2,40 +2,13 @@
 
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { AnimatePresence, MotionConfig, motion } from "framer-motion"
-import { Car, Palette } from 'lucide-react'
+// import { Car, Palette } from 'lucide-react'
 import { useEffect, useMemo, useState } from "react"
 import useMeasure from "react-use-measure"
 import FamilyButton from "./cult/family-button"
+import { Car, CarColor } from '@/types/Car'
 
-// Update the Car interface to match the one in page.tsx
-interface Car {
-  modelRange: string;
-  typeCode: string;
-  localizedName: {
-    en: string;
-    de: string;
-    it: string;
-    fr: string;
-    es: string;
-  };
-  series: string;
-  // ... other properties ...
-}
 
-// Update the CarColor interface to match the one in page.tsx
-interface CarColor {
-  p0ID: string;
-  hexCode: string;
-  mainColor: string;
-  effect: string;
-  localizedName: {
-    en: string;
-    de: string;
-    fr: string;
-    zh: string;
-  };
-  SortIndex: number;
-}
 
 interface CarColorPickerProps {
   cars: Car[];
@@ -53,8 +26,8 @@ export function CarColorPicker({ cars, onCarSelect, onColorSelect }: CarColorPic
     const [carColors, setCarColors] = useState<CarColor[]>([])
     
     const tabs = [
-      { id: 0, label: "Car", icon: Car, disabled: false },
-      { id: 1, label: "Color", icon: Palette, disabled: selectedCar==null },
+      { id: 0, label: "Car", disabled: false },
+      { id: 1, label: "Color", disabled: selectedCar==null },
     ]
 
   useEffect(() => {
@@ -161,7 +134,6 @@ export function CarColorPicker({ cars, onCarSelect, onColorSelect }: CarColorPic
                 transition={{ type: "spring", bounce: 0.19, duration: 0.4 }}
               />
             )}
-            <tab.icon className="w-4 h-4 inline-block mr-1" />
             {tab.label}
           </button>
         ))}

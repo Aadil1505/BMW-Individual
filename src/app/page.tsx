@@ -4,57 +4,12 @@ import { FamilyButtonDemo } from '@/components/FamilyButton';
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Car, CarImage, CarColor } from '@/types/Car';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Maximize2 } from 'lucide-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-// import SidePanel from '@/components/cult/side-panel';
 
-interface Car {
-  modelRange: string;
-  typeCode: string;
-  localizedName: {
-    en: string;
-    de: string;
-    it: string;
-    fr: string;
-    es: string;
-  };
-  series: string;
-  engineType?: string;
-  wltpCO2Emissions?: {
-    en: string;
-    de: string;
-  };
-  wltpCO2Class?: {
-    en: string;
-    de: string;
-  };
-  wltpFuelConsumption?: {
-    en: string;
-    de: string;
-  };
-}
-
-interface CarImage {
-  url: string;
-  environment: string;
-  viewAngle: string;
-}
-
-interface CarColor {
-  p0ID: string;
-  hexCode: string;
-  mainColor: string;
-  effect: string;
-  localizedName: {
-    en: string;
-    de: string;
-    fr: string;
-    zh: string;
-  };
-  SortIndex: number;
-}
 
 
 
