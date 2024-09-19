@@ -2,20 +2,16 @@
 
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { AnimatePresence, MotionConfig, motion } from "framer-motion"
-// import { Car, Palette } from 'lucide-react'
 import { useEffect, useMemo, useState } from "react"
 import useMeasure from "react-use-measure"
 import FamilyButton from "./cult/family-button"
 import { Car, CarColor } from '@/types/Car'
-
-
 
 interface CarColorPickerProps {
   cars: Car[];
   onCarSelect: (car: Car) => void;
   onColorSelect: (color: CarColor) => void;
 }
-
 
 export function CarColorPicker({ cars, onCarSelect, onColorSelect }: CarColorPickerProps) {
     const [activeTab, setActiveTab] = useState(0)
