@@ -97,6 +97,8 @@ export default function PremiumBMWGallery() {
     );
   }
 
+  const isLastFourImages = activeImageIndex >= carImages.length - 4;
+
   return (
     <motion.div
       className="w-full h-screen overflow-hidden relative"
@@ -169,7 +171,7 @@ export default function PremiumBMWGallery() {
       />
 
       {selectedCar && (
-        <div className="absolute top-8 left-8 text-primary-foreground">
+        <div className={`absolute top-8 left-8 ${isLastFourImages ? 'text-primary' : 'text-secondary'}`}>
           <h1 className="md:text-4xl text-2xl font-bold">{selectedCar.localizedName.en}</h1>
           {selectedColor && (
             <div className="md:text-xl text-md mt-2">
