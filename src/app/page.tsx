@@ -1,12 +1,10 @@
 'use client'
 
 import { FamilyButtonDemo } from '@/components/FamilyButton';
-import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Car, CarColor, CarImage } from '@/types/Car';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Loader, Maximize2 } from 'lucide-react';
+import { Loader } from 'lucide-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -182,25 +180,6 @@ export default function PremiumBMWGallery() {
             </div>
           )}
         </div>
-      )}
-
-      {activeImage && (
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="outline" size="icon" className="absolute top-8 right-8 rounded-full bg-white/10 hover:bg-white/20 text-white">
-              <Maximize2 className="h-6 w-6" />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-7xl w-full h-[80vh] border-none">
-            <Image
-              src={activeImage.url}
-              alt={`${selectedCar?.localizedName.en || 'BMW'} - ${activeImage.environment} - ${activeImage.viewAngle}`}
-              fill
-              className="object-contain"
-              quality={100}
-            />
-          </DialogContent>
-        </Dialog>
       )}
     </motion.div>
   );
