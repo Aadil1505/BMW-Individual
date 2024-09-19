@@ -4,14 +4,11 @@ import { FamilyButtonDemo } from '@/components/FamilyButton';
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Car, CarImage, CarColor } from '@/types/Car';
+import { Car, CarColor, CarImage } from '@/types/Car';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Maximize2 } from 'lucide-react';
+import { Loader, Maximize2 } from 'lucide-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-
-
-
 
 export default function PremiumBMWGallery() {
   const [cars, setCars] = useState<Car[]>([]);
@@ -120,14 +117,14 @@ export default function PremiumBMWGallery() {
               src={activeImage.url}
               alt={`${selectedCar?.localizedName.en || 'BMW'} - ${activeImage.environment} - ${activeImage.viewAngle}`}
               fill
-              className="object-cover max-sm:opacity-50"
+              className="object-cover max-sm:opacity-70"
               priority
               quality={100}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
+            {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" /> */}
 
-            <div className='sm:hidden absolute inset-0 flex justify-center items-center p-4'>
-              <Carousel className="w-full max-w-sm">
+            <div className='sm:hidden absolute inset-0 flex flex-col justify-center items-center p-4'>
+              <Carousel className="w-full max-w-sm mb-2">
                 <CarouselContent>
                   {carImages.map((image, index) => (
                     <CarouselItem key={index}>
@@ -147,13 +144,19 @@ export default function PremiumBMWGallery() {
                 <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2" />
                 <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2" />
               </Carousel>
+              {/* <div>
+                <h3>{selectedCar?.localizedName.en}</h3>
+                <h3>{selectedCar?.wltpCO2Emissions?.en}</h3>
+                <h3>{selectedCar?.wltpFuelConsumption?.en}</h3>
+                <h3>{selectedCar?.series} {selectedCar?.modelRange} {selectedCar?.typeCode}</h3>
+              </div> */}
             </div>
           </motion.div>
         </AnimatePresence>
       ) : (
         <div className="w-full h-full flex items-center justify-center text-center">
-          <p className="text-white text-2xl">
-            {isLoading ? 'Loading images...' : selectedCar ? 'Select a color to view images' : 'Select a car and color to view images'}
+          <p className="text-primary-foreground text-2xl">
+            {isLoading ? <Loader className='animate-spin size-10'/> : selectedCar ? 'Select a color to view images' : 'Select a car and color to view images'}
           </p>
         </div>
       )}
@@ -166,10 +169,15 @@ export default function PremiumBMWGallery() {
       />
 
       {selectedCar && (
-        <div className="absolute top-8 left-8 text-white">
-          <h1 className="text-4xl font-bold">{selectedCar.localizedName.en}</h1>
+        <div className="absolute top-8 left-8 text-primary-foreground">
+          <h1 className="md:text-4xl text-2xl font-bold">{selectedCar.localizedName.en}</h1>
           {selectedColor && (
-            <p className="text-xl mt-2">{selectedColor.localizedName.en}</p>
+            <div className="md:text-xl text-md mt-2">
+              <p>{selectedColor.localizedName?.en}</p>
+              <p>{selectedCar?.wltpCO2Emissions?.en}</p>
+              <p>{selectedCar?.wltpFuelConsumption?.en}</p>
+              <p>{selectedCar?.modelRange} {selectedCar?.typeCode}</p>
+            </div>
           )}
         </div>
       )}
